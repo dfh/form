@@ -1,0 +1,547 @@
+SCRATCH
+
+auto-admin, scaffold.
+
+via subklasser.
+
+* controller (get/post/put)
+	* validering + felmeddelanden server-sida (i controller)
+
+* displayer (visa lista, formulär etc)
+	* bygga lista
+	* bygga formulär
+
+* js-validering
+
+
+superklass:
+
+prefix: Autoadmin, Aa, Admin, Scaffold, 
+
+--
+
+Db_model
+
+flera validatorer per attribut. standard för syntax-koll, kan baseras på max/min
+el. regex-fält (typ 'validate' => <expr>). men kan även behöva göra mer komplex
+validering, typ kolla om en användare redan existerar med samma e-postadress.
+
+<attr_name>:
+	attr_name (attr_name) [attribute name]
+	type (string) [attribute type ('string', 'email' etc.)]
+	use_def (true) [use default if exists, for 'created_on' etc.]
+	req (false) [attr is required to be set]
+	name (Attr_name) [readable name]
+	title (name) [readable title (might be longer than name)]
+	errmsg (%(name)s is not valid) [error message]
+	errmsg_empty (%(name)s must not be empty) [error message when empty]
+	vals (null) [valid values, if applicable, array or callback. used for dropdowns etc.]
+	default (string|int) [default value on inserts/updates]
+	validates (array) [validation information]
+		use_def (true) [use default validators]
+		min (null) [minimum value for int or string length]
+		max (null) [maximum ^^]
+		regexp (null) [validate syntax by given regexp]
+		custom (null)	[one or more custom validators]
+	validators (array) [default validators (if validates['use_def']) + custom validators]
+
+validator callbacks:
+	values:
+		a) valid callback (closure or valid callback)
+		b) this:<method name> -> $this->method_name
+	call:
+		<validator>( $this, $attr, $val ) where $attrs is attribute definition (as above)
+
+default validators:
+	this:validate_<attr_name>
+	will:
+		a) perform empty check
+		b) perform syntax check
+
+	return true on success, else throw Validation_error( 'error message' ).
+
+attrs & methods:
+	static_db
+	static_table
+	_static_tables
+
+	db
+	table
+	key
+	keydata
+	meta_table
+	meta_cols
+	meta_key
+	default_order
+	log
+
+	attrs() -> attribute definition
+
+	attr_info( $attr_name, $key = null ) -> attr definition 
+	has_attr( $attr_name ) -> t/f
+
+	__construct(): sets up meta + attr specs
+	_add_attr_defaults( $name, $spec, $default_attrs )
+	_default_attrs() -> array m. default attr specs
+
+	db()
+
+	in_db() -> true iff object is in database
+
+	save()
+	delete()
+
+	pre_save()
+	do_insert()
+	do_update()
+	do_delete()
+
+	validate_<type>( $model, $attr, $val ): default validator for <type>
+	validate_not_empty( $model, $attr, $val ): default validator for not empty check
+	validate_attr( $attr ): validates given attr
+
+	to_array()
+	to_json()
+	from_array()
+	from_json()
+
+	create()
+	find_by()
+	find_by_sql()
+	find_where()
+
+--
+
+Attr_controllable
+
+$m->foo = 'hej'
+a) prop. set, overwrite (default)
+b) not set, set $m->foo (__set)
+
+$m->foo
+a) prop. exists, return (default)
+c) none of above, return null ?? (__get)
+
+$m->foo()
+a) foo() exists, call (default)
+b) $m->foo exists. return call or $m->foo (__call)
+c) none of above, return null ?? (__call)
+
+$m->foo('hej')
+a) foo() exists, call (default)
+b) $m->foo exists, set $m->foo = 'hej' (__call)
+
+$m->act_as_map( 'foo' )
+a) $m->foo exists, add array access ($m->_map['foo'] = true)
+
+$m->foo(0)
+a) $m->foo[0] exists, return
+b) return null 
+
+$m->foo(0, 'nej')
+a) $m->foo exists, $m->foo[0] = 'hej'
+b) return null
+
+--
+
+Form
+
+<field_name>:
+	field_name (field_name): field name (copy of key) (autoset)
+
+	name (Field_name): readable name
+
+	label (name): readable label
+	id (field_name): html id
+	help_msg (''): help message
+
+	add_default_def (false): fill w/ default def. if exists, for 'submit' etc.
+
+	values (array/callback, null): valid values, if applicable, array or callback. used for selects etc.
+	value (mixed, null): value to use for field (for hiddens)
+	default (mixed/callback, null): default data
+
+	renderer (string (template filename) or callback)
+
+Validatable:
+	type
+	add_default_validators
+	required 
+	validators (array)
+	errmsg
+	errmsg_*
+
+validator callbacks:
+	call:
+		<validator>( $self, $field, $val ) where $field is field definition (as above)
+
+renderer callbacks:
+	call:
+		<renderer>( $self, $field, $val ) where $field is field definition (as above)
+
+<fieldset name>:
+	fieldset_name (fieldset_name) [fieldset name]
+	title (fieldset_name) [fieldset title]
+	fields (array) [field names]
+
+properties:
+	action (string, ''): action
+	method (string, 'get'): method
+	enctype (string, 'utf-8'): encoding
+	accept_charset (string, n''): accept-charset
+
+methods:
+	fields() -> field definition
+	fields_order() -> field order (defaults to field definition order)
+	fieldsets() -> fieldsets (defaults to none)
+	fieldsets_order() -> fieldsets order (defaults to fieldset definition order)
+	default_field() -> array m. default field specs
+
+	field( $field, $key = null ): -> field definition 
+	has_field( $field ): -> t/f
+	source( & $source ): sets source (array) for field values
+
+	__construct(): sets upp field specs
+
+	_init_field( $field_name ): 
+	_renderer($field): -> renderer for field
+
+	render(): renders form
+	render_<type>( $form, $field, $val ): default renderer for <type>
+	render_field( $field ): renders given field
+
+
+_init_field( $field_name ) sätter default-värden på fält.
+default_<field name> -> default-värden för fält med namn <field name>
+
+renderer:
+	'textarea' -> $this->render_textarea()
+	'this:custom' -> $this->custom()
+	callback -> callback()
+
+hur ange renderare? och hur lista ut vilken som ska användas i _renderer() ??
+	
+--
+
+in place editing. how?
+
+--
+
+AUTH DB HTML IF
+
+SIGN UP
+/sign_up/
+get: auth/register.html.php
+post: auth/register.html.php | -> /welcome/
+
+/activate_account/<token>
+get: auth/activate.php, auth/activation_ok.html.php | auth/activation_error.html.php
+
+PROFILE
+/profile/
+get: auth/profile.html.php
+post: auth/profile.html.php | -> /profile/
+
+/profile/edit/
+get: auth/profile_edit.html.php
+post: auth/profile_edit.html.php | -> /profile/edit/
+
+RESET PASSWORD
+/reset_password/
+get: auth/password_reset.html.php
+post: auth/password_reset_sent.html.php
+
+CHANGE PASSWORD
+/change_password/<hash>
+get: auth/password_change.html.php
+post: auth/password.html.php | auth/password_changed.html.php
+
+DELETE USER
+/profile/delete/
+get: auth/profile_delete.html.php
+post: auth/profile_delete_confirm.html.php -> delete -> /
+
+
+session can hold username/password/sensitive data, as only the
+session ID is stored in client cookie.
+
+however, would be nice to have a token mechanism to have cookie based
+logins w/o session. how? maybe add a layer somewhere that creates a token
+from logged in user (send-hook) and retrieves the user upon the next request.
+
+--
+
+Form framework
+
+Form <- Db_model
+
+Form ärver specifikation från Db_model:
+	type
+	min
+	max
+	errmsg
+	errmsg_empty
+	req
+	validator
+
+Formulär motsvarar ett specifikt formulär, och kan därför ha andra
+valideringskriterier än Db_model: om spec. satt i Form, skrivs den inte
+över med spec. från Db_model.
+
+Ska formulär ärva validatorer? Vad händer om några av dem är beroende av
+modellens tillstånd?
+
+* validera formulär
+* validera modell
+
+alltid separat, eftersom modell valideras när sparas.
+
+kanske kan ange i form om validator ska ärvas? default?? nej. ärv inte som
+default. den ska förmodligen bara baseras på typ ändå. sedan om sparning
+misslyckas kommer felmeddelanden ändå upp i formuläret.
+
+--
+
+Validatable: object w/ validators
+
+<attr name>:
+	add_def_validators (bool, true): add default (empty+type) validators
+	type (string, 'string'): type (string|email|url|int|num|bool)
+	required (bool, false): required or not
+	min (int, null): minimum value for int or string length
+	max (int, null): maximum ^^
+	regexp (string, null): validate syntax
+	errmsg (string, '%(attr_name) is not valid.'): default error message
+	errmsg_<validator> (string, ^^): error message for <validator>
+		errmsg_empty (string, '%(attr_name) must not be empty.'): default error msg for empty vals
+	validators (array): all validators to run. if add_def_validators, default will be added
+
+default rules:
+	if regexp: add regexp validator to validators ('regexp')
+	if add_def_validators: add empty + type validators ('required' + 'type')
+
+validating:
+	run validators in order
+
+validator: callable that throws Validation_error on fail
+	values:
+		a) valid callback (closure or callback)
+		b) this:<method name>
+	call:
+		<validator>( $this, $attr, $val ): $attr is <attr name> as above
+
+errmsg: string or callable that returns an error message
+
+methods:
+	validate( $attr_name ): validates $attr_name, throws Validation_error on fail
+	is_valid( $attr_name ): runs validate + catches exception (returns true/false)
+
+	attrdef( $attr_name, $attrdef = null ): sets/gets attr def.
+
+	errors( $errs = '' ): get/set errors
+	add_errors( $errors ): adds errors (simple array merge)
+
+	validators( $attr_name, $vs = null ): sets/gets validators for $attr_name
+	add_validator( $attr_name, $validator, $validator_name = null ): adds validator, optionally named
+	del_validator( $attr_name, $validator_name ): deletes named validator
+
+	helpers:
+		_init_attrdef( $attr_name ): sätter defaults etc. på $attr_name, flaggar att körts med $attr['_inited'] = true
+		_errmsg( $attr_name, $validator_name ): returns error message, falls back if not found
+		_validators( $attr_name ): returns validators for $attr_name (adds default etc.)
+
+	customizing:
+		validator_<validator_name>: validator for <validator_name>
+			validator_regexp( $self, $attr_name, $value ) : validates regexp
+			validator_empty( $self, $attr_name, $value ): validates not empty
+			validator_<type>( $self, $attr_name, $value ): validate type
+		errmsg_<validator_name>: error message for <validator_name>
+			
+		validate_<attr_name>: used for validating <attr_name>
+		errmsg_for_<attr_name>: error message for <attr_name>
+
+
+både validator och errmsg kan vara callbacks, enl. samma princip.
+vid validering:
+	kör varje validator. (t.ex. _validate_string, _validate_empty)
+
+runtime vs. initiera rätt och kör rakt av on runtime
+RUNTIME
+
+validators:
+	1. validate_<attr_name>
+	2. validate_regexp
+	3. validate_empty
+	4. validate_<type>
+
+_errmsg( $attr_name, $validator_name ):
+	1. errmsg_for_<attr_name>()
+	2. errmsg_<validator_name>()
+	3. def: errmsg_<validator_name>
+	4. def: errmsg
+
+errmsg( $attr, $validator_name = null ): returnerar felmeddelande
+	kollar errmsg, errmsg_<validator_name> och errmsg_<attr_name>
+
+--
+
+REDIRECTION
+
+?next=location
+
+has_next(): has next url
+next( next, overwrite = false ): sets next url
+next(): -> current next url
+add_next( url, default ): -> url w/ next added
+
+if ( !$rq->next )
+	$rq->next = location;
+
+--
+
+Profil
+
+user->profile()
+
+skapa:
+
+	när skapar användare. (haka in i Db_user) (db_user.post_insert)
+
+
+hämta:
+	
+	hämtas av profile(), som kollar conf. user_profile = <profile class> och hämtar.
+
+
+formulär:
+
+	ge 1+ modeller till form_db_model och säga vilken modell som vilket attribut hör till.
+
+		'model' => 'model_name', defaults to '0' (index i array helt enkelt)
+
+	blir knas om man har två modeller med samma namn på attribut. men isf skulle man kunna
+	göra någon slags mappning, typ:
+
+		'profile_id' => 
+			'model_attr' => 'id'
+
+		
+bilder:
+
+	spara sökväg (relativ) till bild. lägg i data/user_profiles/	
+	format: png
+	filnamn = md5( user_id )
+
+--
+
+Permissions
+
+gör enkel hook som kollar member type. kör sedan med typ:
+
+	perm.require <typ> -> visa 403 (med info vad som krävs och hur man får det)
+
+enkelt att köra i pre-hook inför visning av sida i rest_controller.
+
+hook kollar helt enkelt user->profile->membership_type.
+
+ny extension:
+
+	perm
+
+	events:
+
+		perm.has (& subject, & object/permission_name, & has_perm)
+
+		sätter has_perm on success.
+
+så, typ:
+
+	$ok = false;
+	Event::run( 'perm.has', $user, 'gol', $ok );
+	if ( $ok ) { .. }
+
+	Event::run( 'perm.require', $user, 'gol' ); -> kör ovan + ev. render 403 error.
+
+
+lagring av permissions
+
+	tabell permissions
+
+		id						auto increment
+		codename			shortname ('free', 'poi', etc.)
+		name					textual description ('Protector of the Innocent', etc.)
+
+	users.type, mappas mot permissions.codename
+
+	permissions för artiklar etc. lagras i xx.userlevel => permissions.codename
+
+--
+
+Video
+
+flv and mp4 to start with.
+
+video files
+
+	data/video/
+
+database holds video info:
+
+	videos
+		id
+		urlname				vc 63
+		title					vc 255
+		description		text
+		display				tinyint
+		base_fname		vc 63 (without alt & suffix)
+		permission		vc 15
+		duration			int (seconds)
+		created_on		int
+		updated_on		int
+	
+	videos_specific
+		id
+		video_id
+		fname					vc 63
+		mimetype			vc 63
+		duration			int (centiseconds)
+		w							int
+		h							int
+		filesize			int
+		created_on		int
+		updated_on		int
+		
+admin system scans video dir for .flv and .mp4 and reports of files not
+yet in database, with link to add them to it (add description and such).
+
+video can have several versions (mimetypes, resolutions etc.)
+
+	<filename>[.alt-<alt>].<suffix>
+
+	for example, with four versions (base_fname: video1)
+
+		video1.mp4
+		video1.alt-2.mp4
+		video1.alt-1.flv
+		video1.alt-2.flv
+
+need: lib to get video info (duration etc.)
+
+nya videoklipp (visa i ruta överst):
+	nya klipp till existerande filmer: array: film, klipp
+	nya filmer (m. klipp): film
+
+	presentation:
+
+		* hittade 3 nya filmer:
+				film1 (lägg till -> ny video)
+				film2 ..
+				film3 ..
+
+		* hittade 4 nya klipp till existerande filmer:
+				film1: klipp (mp4, 123x456) (lägg till -> lägg till direkt)
+				film1: klipp (flv, 456x123) ..
+	
+Video::specifics() -> alla aktuella specifics
+Video::new_specifics() -> alla inte sparade specifics som hittades på disk
+
