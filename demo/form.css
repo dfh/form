@@ -1,7 +1,7 @@
 /**
  * @forms
  */
-form > div {
+form > div, fieldset > div {
   margin: 15px 0; }
 
 form {
@@ -24,13 +24,18 @@ form {
 
 /* fieldsets */
 fieldset {
-  border: none;
-  padding: 0;
-  margin: 15px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px 0;
   clear: both; }
 
+h3.fieldset_title {
+  margin-top: 0;
+  margin-bottom: 3px;
+  color: #666; }
+
 h3 + fieldset {
-  margin-top: -10px; }
+  margin-top: 0; }
 
 /* labels */
 label {
@@ -86,6 +91,9 @@ input.btn {
 /* submit area */
 div.submit {
   margin-top: 20px; }
+
+fieldset .f {
+  margin-top: 0; }
 
 /* error messages */
 form .error-w {

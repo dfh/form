@@ -3,7 +3,7 @@ $this->title = 'Basic';
 ?>
 
 <p class="nav">
-	← <a href="index.php">Back to index</a>
+	← <a href="">Back to index</a>
 </p>
 
 <h1>Demo: basic form</h1>

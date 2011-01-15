@@ -22,6 +22,12 @@ Form is licensed under <a href="http://www.gnu.org/licenses/gpl-3.0.html">GPLv3<
 The latest sources can be downloaded from <a href="http://github.com/dfh/form">Github</a>.
 </p>
 
+<h2>Documentation</h2>
+
+<p>
+To be written..
+</p>
+
 <h2>Demos</h2>
 
 <ul>
@@ -31,4 +37,5 @@ The latest sources can be downloaded from <a href="http://github.com/dfh/form">G
 	<li><a href="validators.php">Validators</a></li>
 	<li><a href="error_messages.php">Error messages</a></li>
 	<li><a href="rendering.php">Rendering</a></li>
+	<li><a href="fieldsets.php">Fieldsets</a></li>
 </ul>

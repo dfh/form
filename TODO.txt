@@ -1,0 +1,4 @@
+TODO
+
+* Allow for callbacks when defining values. By using $this->_values( $field_name )?
+* Automagic XSRF protection

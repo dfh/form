@@ -125,7 +125,7 @@ abstract class Form extends Validatable
 	 * Returns array with field names indicating field order,
 	 * used when rendering.
 	 */
-	public function fields_order()
+	protected function fields_order()
 	{
 		return array_keys( $this->_fields );
 	}
@@ -135,7 +135,7 @@ abstract class Form extends Validatable
 	 *
 	 *	fieldset name => array with field names
 	 */
-	public function fieldsets()
+	protected function fieldsets()
 	{
 		return array();
 	}
@@ -144,7 +144,7 @@ abstract class Form extends Validatable
 	 * Returns array with fieldset names indicating fieldset order,
 	 * used when rendering.
 	 */
-	public function fieldsets_order()
+	protected function fieldsets_order()
 	{
 		return array_keys( $this->_fieldsets );
 	}
@@ -173,6 +173,9 @@ abstract class Form extends Validatable
 
 		if ( !$this->_fields )
 			$this->_fields = $this->fields();
+
+		if ( !$this->_fieldsets )
+			$this->_fieldsets = $this->fieldsets();
 
 		# Validatable uses _valdefs, use the same "namespace" for the fields
 		$this->_attrdefs =& $this->_fields;
@@ -342,13 +345,24 @@ abstract class Form extends Validatable
 	public function render( $ctxt = array() )
 	{
 		$res = '';
-		$i = 0;
-		$fields = $this->fields_order();
-		$c = count( $fields );
-		foreach ( $fields as $name ) {
-			$ctxt['first'] = !$i++;
-			$ctxt['last'] = $i == $c;
-			$res .= $this->render_field( $name, $ctxt );
+		$fieldsets = $this->fieldsets_order();
+		if ( $fieldsets ) {
+			$i = 0;
+			$c = count( $fieldsets );
+			foreach ( $fieldsets as $f_name ) {
+				$ctxt['first_fieldset'] = !$i++;
+				$ctxt['last_fieldset'] = $i == $c;
+				$res .= $this->render_fieldset( $f_name, $ctxt );
+			}
+		} else {
+			$i = 0;
+			$fields = $this->fields_order();
+			$c = count( $fields );
+			foreach ( $fields as $name ) {
+				$ctxt['first'] = !$i++;
+				$ctxt['last'] = $i == $c;
+				$res .= $this->render_field( $name, $ctxt );
+			}
 		}
 
 		# wrap in form
@@ -366,6 +380,61 @@ abstract class Form extends Validatable
 			$this->_renderer( $field_name ),
 			array( $this, $field, $this->$field_name, $ctxt )
 		);
+	}
+
+	/**
+	 * Renders a fieldset.
+	 */
+	public function render_fieldset( $fieldset_name, $ctxt = array() )
+	{
+		if ( !isset( $this->_fieldsets[$fieldset_name] ) )
+			throw new InvalidArgumentException();	
+
+		$fieldset =& $this->_fieldsets[$fieldset_name];
+
+		# allow shorthand fieldset definition 'fieldset_name' => 
+		# 'field1[,field2[,..]]'
+		is_array( $fieldset )
+			or $fieldset = array( 'fields' => $fieldset );
+
+		if ( !isset( $fieldset['fields'] ) )
+			throw new RuntimeException( "Missing fieldset definition flag: 'fields'" );
+
+		# add defaults
+		$fieldset += array(
+			'render_in_fieldset' => true,
+			'title' => null,
+		);
+
+		# convert shorthand fields to standard array representation
+		is_array( $fieldset['fields'] )
+			or $fieldset['fields'] = explode( ',', (string) $fieldset['fields'] );
+
+		# little shortcut
+		$fields =& $fieldset['fields'];
+
+		$ctxt['fieldset'] = $fieldset;
+		$ctxt['fieldset_title'] = $fieldset['title'];
+
+		# need counters to tell which fieldsets are first and last in form
+		$f_res = '';
+		$i = 0;
+		$fields = array_map( 'trim', $fields );
+		$c = count( $fields );
+
+		foreach ( $fields as $name ) {
+			$ctxt['first'] = !$i++;
+			$ctxt['last'] = $i == $c;
+			$f_res .= $this->render_field( $name, $ctxt );
+		}
+
+		# wrap in fieldset
+		if ( $fieldset['render_in_fieldset'] ) {
+			$ctxt['fieldset_content'] = $f_res;
+			return Tpl::create( 'fieldset.html.php', $ctxt, $this->template_dir )->get();
+		} else {
+			return $f_res;
+		}	
 	}
 
 	/**

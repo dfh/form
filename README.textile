@@ -92,7 +92,7 @@ Theses names are reserved (due to implementation choices) and not possible to us
 
 h2. Meta
 
-Copyright 2010, 2011 David Högberg (david@hgbrg.se, "http://david.hgbrg.se/":http://david.hgbrg.se/.
+Copyright 2010, 2011 David Högberg (david@hgbrg.se, "http://david.hgbrg.se/":http://david.hgbrg.se/).
 
 Licensed under GPLv3.
 
