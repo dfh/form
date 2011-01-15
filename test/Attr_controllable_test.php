@@ -1,6 +1,6 @@
 <?php
 
-require '../lib/Attr_controllable.php';
+require '../lib/form.php';
 
 /**
  * Tests Attr_controllable.

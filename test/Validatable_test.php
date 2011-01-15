@@ -11,10 +11,7 @@ function debug( $msg, $arg1 = null ) {
 	echo $msg . "\n";
 }
 
-require '../lib/std.php';
-require '../lib/Attr_controllable.php';
-require '../lib/Validatable.php';
-require '../lib/Validation_error.php';
+require '../lib/form.php';
 
 /** custom validator for testing validator callbacks */
 function validator_func( $self, $attr, $val )
@@ -127,7 +124,8 @@ class Validatable_test extends PHPUnit_Framework_TestCase
 			
 			# min and max limits (min: 2: max: 1, min/max: 2/3)
 			
-			array( 'attr_string_min', '', false, 'errstring' ),
+			array( 'attr_string_min', null, true, 'errstring' ), # empty OK
+			array( 'attr_string_min', '', true, 'errstring' ), # empty OK
 			array( 'attr_string_min', 'a', false, 'errstring' ),
 			array( 'attr_string_min', 'aa', true ),
 			array( 'attr_string_min', 'aaa', true ),
@@ -137,7 +135,8 @@ class Validatable_test extends PHPUnit_Framework_TestCase
 			array( 'attr_string_max', 'aa', false, 'errstring' ),
 			array( 'attr_string_max', 'aaa', false, 'errstring' ),
 
-			array( 'attr_string_min_max', '', false, 'errstring' ),
+			array( 'attr_string_min_max', null, true, 'errstring' ), # empty OK
+			array( 'attr_string_min_max', '', true, 'errstring' ), # empty OK
 			array( 'attr_string_min_max', 'a', false, 'errstring' ),
 			array( 'attr_string_min_max', 'aa', true ),
 			array( 'attr_string_min_max', 'aaa', true ),
@@ -466,52 +465,52 @@ class Validatable_class extends Validatable
 		return 'errcustom';
 	}
 
-	protected function errmsg()
+	protected function errmsg( $attr )
 	{
 		return 'errmsg';
 	}
 
-	protected function errmsg_empty()
+	protected function errmsg_empty( $attr )
 	{
 		return 'errempty';
 	}
 
-	protected function errmsg_regexp()
+	protected function errmsg_regexp( $attr )
 	{
 		return 'errregexp';
 	}
 
-	protected function errmsg_string()
+	protected function errmsg_string( $attr )
 	{
 		return 'errstring';
 	}
 
-	protected function errmsg_email()
+	protected function errmsg_email( $attr )
 	{
 		return 'erremail';
 	}
 
-	protected function errmsg_url()
+	protected function errmsg_url( $attr )
 	{
 		return 'errurl';
 	}
 
-	protected function errmsg_timestamp()
+	protected function errmsg_timestamp( $attr )
 	{
 		return 'errtimestamp';
 	}
 
-	protected function errmsg_int()
+	protected function errmsg_int( $attr )
 	{
 		return 'errint';
 	}
 
-	protected function errmsg_num()
+	protected function errmsg_num( $attr )
 	{
 		return 'errnum';
 	}
 
-	protected function errmsg_bool()
+	protected function errmsg_bool( $attr )
 	{
 		return 'errbool';
 	}

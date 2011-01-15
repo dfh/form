@@ -1,5 +1,22 @@
 <?php
 
+/*
+ Copyright 2010, 2011 David Högberg (david@hgbrg.se)
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /**
  * An object that can be validated.
  *
@@ -56,6 +73,9 @@
  *	required (bool, false):
  *		attribute is required or not
  *
+ *	name (string):
+ *		readable attribute name, will default to uppercased attr_name
+ *
  *	min (int, null):
  *		minimum value for int or string length
  *
@@ -106,7 +126,7 @@ class Validatable extends Attr_controllable
 	protected function attrdef_default()
 	{
 		return array(
-			'type' => 'stri',
+			'type' => 'string',
 			'add_def_validators' => true,
 			'required' => false,
 			'min' => null,
@@ -402,10 +422,12 @@ class Validatable extends Attr_controllable
 
 		$attr_name = $attr['attr_name'];
 
+		$msg = '';
+
 		# $this->errmsg_for_<attr_name>()
 		if ( method_exists( $this, "errmsg_for_${attr_name}" ) ) {
 			$f = "errmsg_for_${attr_name}";
-			$msg = $this->$f();
+			$msg = $this->$f( $attr );
 
 		# def. errmsg_<validator_name> if validator name given
 		} elseif ( $validator_name && isset( $attr["errmsg_${validator_name}"] ) ) {
@@ -415,16 +437,16 @@ class Validatable extends Attr_controllable
 		# $this->errmsg_<validator_name>() if validator name given
 		} elseif ( $validator_name && method_exists( $this, "errmsg_${validator_name}" ) ) {
 			$f = "errmsg_${validator_name}";
-			$msg = $this->$f();
+			$msg = $this->$f( $attr );
 
 		# def. errmsg if set
-		} elseif ( isset( $attr['errmsg'] ) ) {
-			# might be callback
-			$msg = $this->_get_or_call( $attr["errmsg_${validator_name}"], array( $attr ) );
+		//} elseif ( isset( $attr['errmsg'] ) ) {
+			//# might be callback
+			//$msg = $this->_get_or_call( $attr["errmsg"], array( $attr ) );
 
 		# standard error message by default
 		} else {
-			$msg = $this->errmsg();
+			$msg = $this->errmsg( $attr );
 		}
 
 		return sprintfn( $msg, $attr + array( 'value' => $this->$attr['attr_name'] ) );
@@ -479,7 +501,11 @@ class Validatable extends Attr_controllable
 
 			# string types: empty if null, false or empty string
 			default:
-				$set = is_string( $val ) && strlen( $val ) != 0;
+				# casting in for loop below won't catch nulls
+				$set &= !empty( $val );
+				foreach ( (array) $val as $v ) {
+					$set &= is_string( $v ) && strlen( $v ) != 0;
+				}
 		}
 		if ( !$set )
 			throw new Validation_error( $this->_errmsg( $attr, 'empty' ) );
@@ -511,7 +537,7 @@ class Validatable extends Attr_controllable
 		if ( !$perform )
 			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
 		else
-			if ( !validate_string( $val, $attr['min'], $attr['max'] ) )
+			if ( $val !== '' && !validate_string( $val, $attr['min'], $attr['max'] ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'string' ) );
 	}	
 
@@ -523,7 +549,7 @@ class Validatable extends Attr_controllable
 		if ( !$perform )
 			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
 		else
-			if ( !validate_email( $val ) )
+			if ( $val && !validate_email( $val ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'email' ) );
 	}	
 
@@ -535,7 +561,7 @@ class Validatable extends Attr_controllable
 		if ( !$perform )
 			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
 		else
-			if ( !validate_url( $val ) )
+			if ( $val && !validate_url( $val ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'url' ) );
 	}	
 
@@ -559,7 +585,7 @@ class Validatable extends Attr_controllable
 		if ( !$perform )
 			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
 		else
-			if ( !validate_int( $val, $attr['min'], $attr['max'] ) )
+			if ( $val !== '' && !validate_int( $val, $attr['min'], $attr['max'] ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'int' ) );
 	}	
 
@@ -571,7 +597,7 @@ class Validatable extends Attr_controllable
 		if ( !$perform )
 			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
 		else
-			if ( !validate_num( $val, $attr['min'], $attr['max'] ) )
+			if ( $val !== '' && !validate_num( $val, $attr['min'], $attr['max'] ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'num' ) );
 	}	
 
@@ -606,105 +632,101 @@ class Validatable extends Attr_controllable
 	/**
 	 * Default error message.
 	 */
-	protected function errmsg()
+	protected function errmsg( $attr )
 	{
-		return "{%(name)s is not valid (value: '%(value)s', type: %(type)s).";
+		return "%(name)s is not valid (value: '%(value)s', type: %(type)s).";
 	}
 	
 	/**
 	 * Error message for empty attributes that are required to not be empty.
 	 */
-	protected function errmsg_empty()
+	protected function errmsg_empty( $attr )
 	{
-		return '%(attr_name)s must not be empty (%(value)s).';
+		return '%(name)s must not be empty.';
 	}
 
 	/**
 	 * Error message for attributes that fail regexp validation.
 	 */
-	protected function errmsg_regexp()
+	protected function errmsg_regexp( $attr )
 	{
-		return '%(attr_name)s is not valid.';
+		return '%(name)s is not valid.';
 	}
 	
 	/**
 	 * Error message for attributes that fail string validation.
 	 */
-	protected function errmsg_string()
+	protected function errmsg_string( $attr )
 	{
-		$attr = func_get_arg(1);
-
 		if ( $attr['min'] && $attr['max'] )
-			return '%(attr_name)s must be between %(min)s and %(max)s characters long.';
+			return '%(name)s must be between %(min)s and %(max)s characters long.';
 		elseif ( $attr['max'] )
-			return '%(attr_name)s must be at most %(max)s characters long.';
+			return '%(name)s must be at most %(max)s characters long.';
 		elseif ( $attr['min'] )
-			return '%(attr_name)s must be at least %(min)s characters long.';
+			return '%(name)s must be at least %(min)s characters long.';
 		else
-			return '%(attr_name)s is not a valid string.';
+			return '%(name)s is not a valid string.';
 	}
 
 	/**
 	 * Error message for attributes that fail e-mail validation.
 	 */
-	protected function errmsg_email()
+	protected function errmsg_email( $attr )
 	{
-		return '%(attr_name)s is not a valid e-mail address.';
+		return '%(name)s is not a valid e-mail address.';
 	}
 
 	/**
 	 * Error message for attributes that fail URL validation.
 	 */
-	protected function errmsg_url()
+	protected function errmsg_url( $attr )
 	{
-		return '%(attr_name)s is not a valid URL.';
+		return '%(name)s is not a valid URL.';
 	}
 
 	/**
 	 * Error message for attributes that fail timestamp validation.
 	 */
-	protected function errmsg_timestamp()
+	protected function errmsg_timestamp( $attr )
 	{
-		return '%(attr_name)s is not a valid timestamp.';
+		return '%(name)s is not a valid timestamp.';
 	}
 
 	/**
 	 * Error message for attributes that fail integer validation.
 	 */
-	protected function errmsg_int()
+	protected function errmsg_int( $attr )
 	{
-		$attr = func_get_arg(1);
-
 		if ( $attr['min'] && $attr['max'] )
-			return '%(attr_name)s must be between %(min)s and %(max)s.';
+			return '%(name)s must be between %(min)s and %(max)s.';
 		elseif ( $attr['max'] )
-			return '%(attr_name)s must be less than %(max)s.';
+			return '%(name)s must be less than %(max)s.';
 		elseif ( $attr['min'] )
-			return '%(attr_name)s must be greater than %(min)s.';
+			return '%(name)s must be greater than %(min)s.';
 		else
-			return '%(attr_name)s is not a valid integer.';
+			return '%(name)s is not a valid integer.';
 	}
 
 	/**
 	 * Error message for attributes that fail numeric validation.
 	 */
-	protected function errmsg_num()
+	protected function errmsg_num( $attr )
 	{
 		if ( $attr['min'] && $attr['max'] )
-			return '%(attr_name)s must be between %(min)s and %(max)s.';
+			return '%(name)s must be between %(min)s and %(max)s.';
 		elseif ( $attr['max'] )
-			return '%(attr_name)s must be less than %(max)s.';
+			return '%(name)s must be less than %(max)s.';
 		elseif ( $attr['min'] )
-			return '%(attr_name)s must be greater than %(min)s.';
+			return '%(name)s must be greater than %(min)s.';
 		else
-			return '%(attr_name)s is not a valid number.';
+			return '%(name)s is not a valid number.';
 	}
 
 	/**
 	 * Error message for attributes that fail boolean validation.
 	 */
-	protected function errmsg_bool()
+	protected function errmsg_bool( $attr )
 	{
-		return '%(attr_name)s is not a valid bool.';
+		return '%(name)s is not a valid bool.';
 	}
 }

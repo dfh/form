@@ -1,8 +1,41 @@
 <?php
 
+/*
+ Copyright 2010, 2011 David Högberg (david@hgbrg.se)
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #
 # PHP standard library
 #
+
+if ( !defined( 'SYSLOG_FACILITY' ) ) {
+	define( 'SYSLOG_FACILITY', LOG_LOCAL2 );
+}
+
+if ( !function_exists( 'debug' ) ) {
+	function debug( $msg, $arg1 = null )
+	{
+		$args = func_get_args();
+
+		if( $arg1 )
+			$msg = @vsprintf( array_shift( $args ), $args );
+
+		syslog( SYSLOG_FACILITY | LOG_DEBUG, $msg );
+	}
+}
 
 /**
  * Returns a HTML representation of the input PHP data. Internally uses var_dump()
@@ -63,6 +96,22 @@ function sprintfn( $str, $args )
 function html_clean( $html )
 {
 	return str_replace( array( "\n", "\r", "\c", "\t" ), ' ', $html );
+}
+
+/**
+ * Is GET?
+ */
+function is_get()
+{
+	return $_SERVER['REQUEST_METHOD'] == 'GET';
+}
+
+/**
+ * Is POST?
+ */
+function is_post()
+{
+	return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
 
 /**

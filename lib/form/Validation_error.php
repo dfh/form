@@ -17,12 +17,27 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require dirname( __FILE__ ) . '/form/std.php';
-require dirname( __FILE__ ) . '/form/Attr_controllable.php';
-require dirname( __FILE__ ) . '/form/Validation_error.php';
-require dirname( __FILE__ ) . '/form/Validatable.php';
-require dirname( __FILE__ ) . '/form/Tpl.php';
-require dirname( __FILE__ ) . '/form/Form.php';
+/**
+ * Validation error.
+ */
+class Validation_error extends Exception
+{
+	protected $errors = array();
 
-/** Default templates. */
-Form::$default_template_dir = dirname( __FILE__ ) . '/form/tpl/';
+	public function __construct( $errors )
+	{
+		$this->errors = $errors;
+
+		if ( is_array( $errors ) )
+			$errmsg = implode( ', ', $errors );
+		else
+			$errmsg = $errors;
+
+		parent::__construct( $errmsg );
+	}
+
+	public function errors()
+	{
+		return $this->errors;
+	}
+}

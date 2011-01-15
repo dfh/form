@@ -1,0 +1,71 @@
+/**
+ * CSS for Form demo.
+ */
+body {
+  font: 12px/1.6 Arial, sans-serif; }
+
+p {
+  margin: 15px 0; }
+
+.hr {
+  border-bottom: 1px solid #ddd;
+  width: 75%;
+  margin: 30px auto; }
+  .hr hr {
+    display: none; }
+
+#doc {
+  width: 720px;
+  margin: 0 auto 20px auto; }
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 30px; }
+
+h1 {
+  font: 28px/1.6 Arial, sans-serif;
+  font-weight: bold;
+  margin: 20px 0; }
+
+h2 {
+  font: 14px/1.6 Arial, sans-serif;
+  font-weight: bold;
+  margin: 20px 0 15px 0; }
+
+h3 {
+  margin: 20px 0 15px 0; }
+
+form {
+  margin: 20px;
+  padding: 10px 15px;
+  border: 1px solid #ccc; }
+
+.msg {
+  text-align: center; }
+  .msg p {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    background: #eee;
+    padding: 10px 15px 8px 15px;
+    font-weight: bold; }
+  .msg p.nok {
+    border: 2px solid #eb4747; }
+  .msg p.ok {
+    border: 2px solid #47eb47; }
+
+p.intro {
+  font-size: 16px;
+  margin-bottom: 20px; }
+
+ul {
+  list-style: disc;
+  margin: 15px 30px; }
+
+#filesource h2 {
+  margin-bottom: 5px; }
+#filesource pre {
+  margin-top: 10px; }
