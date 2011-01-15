@@ -4,41 +4,29 @@ A lightweight framework for defining, validating and rendering HTML forms.
 
 h2. Overview
 
-Form lets you define forms by subclassing a base @Form@ class. You specify
-the action, method etc. of the form, and override a class method that returns
-an array defining all the fields of your form.
+Form lets you define forms by subclassing a base @Form@ class. You specify the action, method etc. of the form, and override a class method that returns an array defining all the fields of your form.
 
-Defining, validating and rendering HTML forms basically comes down to
-three areas:
+Defining, validating and rendering HTML forms basically comes down to three areas:
 
   * Validation of form data.
   * Rendering of input elements.
   * Displaying error messages when user input is invalid.
 
-Form has built-in support for validation of standard types of input data
-like e-mail addresses, URLs, timestamps, integers etc. For special cases,
-adding validation rules is as simple (or hard) as writing a regular expression
-or writing a callback function.
+Form has built-in support for validation of standard types of input data like e-mail addresses, URLs, timestamps, integers etc. For special cases, adding validation rules is as simple (or hard) as writing a regular expression or writing a callback function.
 
-The same goes for rendering standard input fields; there is built-in support
-for rendering fields as text inputs, select drop-downs, checkboxes,
-radio buttons, textareas etc., and defining custom rendering is simple.
+The same goes for rendering standard input fields; there is built-in support for rendering fields as text inputs, select drop-downs, checkboxes, radio buttons, textareas etc., and defining custom rendering is simple.
 
 Error messages are designed to be sensible by default, and easy to customize.
 
-See "Installation and usage" below for a very minimal example. Check out the
-"demos":http://david.hgbrg.se/form/ for a quick overview, or read the full
-documentation available in the doc/ folder or online at the "Github page":http://github.com/dfh/form/.
+See "Installation and usage" below for a very minimal example. Check out the "demos":http://david.hgbrg.se/form/ for a quick overview, or read the full documentation available in the doc/ folder or online at the "Github page":http://github.com/dfh/form/.
 
 h2. Requirements
 
-Form has only been tested with PHP 5.3. Should work (possibly with minimal
-modification) on any PHP 5+ version.
+Form has only been tested with PHP 5.3. Should work (possibly with minimal modification) on any PHP 5+ version.
 
 h2. Installation and usage
 
-Install by copying @lib/form.php@ and @lib/form/@ to a sensible directory.
-Include @lib/form.php@ and you are ready to go.
+Install by copying @lib/form.php@ and @lib/form/@ to a sensible directory. Include @lib/form.php@ and you are ready to go.
 
 A small example:
 
@@ -92,8 +80,7 @@ Demos and documentation available at http://david.hgbrg.se/form/.
 
 h2. Known issues
 
-Theses names are reserved (due to implementation choices) and not possible to
-use as field names:
+Theses names are reserved (due to implementation choices) and not possible to use as field names:
 
   * form_action
   * form_method
@@ -107,15 +94,10 @@ h2. Meta
 
 Copyright 2010, 2011 David Högberg (david@hgbrg.se, http://david.hgbrg.se)
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Licensed under GPLv3.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
