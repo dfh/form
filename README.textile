@@ -2,8 +2,7 @@ h1. FORM
 
 A lightweight framework for defining, validating and rendering HTML forms.
 
-
-h2. OVERVIEW
+h2. Overview
 
 Form lets you define forms by subclassing a base @Form@ class. You specify
 the action, method etc. of the form, and override a class method that returns
@@ -31,14 +30,12 @@ See "Installation and usage" below for a very minimal example. Check out the
 "demos":http://david.hgbrg.se/form/ for a quick overview, or read the full
 documentation available in the doc/ folder or online at the "Github page":http://github.com/dfh/form/.
 
-
-h2. REQUIREMENTS
+h2. Requirements
 
 Form has only been tested with PHP 5.3. Should work (possibly with minimal
 modification) on any PHP 5+ version.
 
-
-h2. INSTALLATION AND USAGE
+h2. Installation and usage
 
 Install by copying @lib/form.php@ and @lib/form/@ to a sensible directory.
 Include @lib/form.php@ and you are ready to go.
@@ -85,8 +82,7 @@ echo $form->render();
 
 ?>
 
-
-h2. DOCUMENTATION AND DEMOS
+h2. Documentation and demos
 
 Latest source code and documentation available at http://github.com/dfh/form/.
 
@@ -94,8 +90,7 @@ Documentation can also be found in the doc/ folder.
 
 Demos and documentation available at http://david.hgbrg.se/form/.
 
-
-KNOWN ISSUES
+h2. Known issues
 
 Theses names are reserved (due to implementation choices) and not possible to
 use as field names:
@@ -108,7 +103,7 @@ use as field names:
   * anything prefixed by underscore ("_")
 
 
-META
+h2. Meta
 
 Copyright 2010, 2011 David Högberg (david@hgbrg.se, http://david.hgbrg.se)
 
