@@ -72,11 +72,11 @@ echo $form->render();
 
 h2. Documentation and demos
 
-Latest source code and documentation available at http://github.com/dfh/form/.
+Latest source code and documentation available at "http://github.com/dfh/form/":http://github.com/dfh/form/.
 
 Documentation can also be found in the doc/ folder.
 
-Demos and documentation available at http://david.hgbrg.se/form/.
+Demos and documentation available at "http://david.hgbrg.se/form/":http://david.hgbrg.se/form/.
 
 h2. Known issues
 
@@ -92,7 +92,7 @@ Theses names are reserved (due to implementation choices) and not possible to us
 
 h2. Meta
 
-Copyright 2010, 2011 David Högberg (david@hgbrg.se, http://david.hgbrg.se)
+Copyright 2010, 2011 David Högberg (david@hgbrg.se, "http://david.hgbrg.se/":http://david.hgbrg.se/.
 
 Licensed under GPLv3.
 
