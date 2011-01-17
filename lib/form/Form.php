@@ -18,6 +18,11 @@
 */
 
 /**
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
+ */
+
+/**
  * Form base.
  *
  * Form is a lightweight framework for defining, validating and rendering
@@ -37,14 +42,42 @@
  *       ),
  *     }
  *   }
+ *
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
  */
 abstract class Form extends Validatable
 {
 	/** Default template directory. */
 	public static $default_template_dir = '';
 
+	/** Enable/disable automagic XSRF guard by default? */
+	public static $default_xsrf_guard_enable = false;
+
+	/** Default Xsrf_guard. If none, self::default_xsrf_guard() will be used. */
+	public static $default_xsrf_guard = null;
+
+	/** Default XSRF form field name to use. */
+	public static $default_xsrf_guard_field_name = '__xsrf_guard';
+
+	/** Default XSRF guard secret key. */
+	public static $default_xsrf_guard_key = '';
+
+
 	/** Template directory. */
-	protected $template_dir;
+	protected $_template_dir;
+
+	/** Enable/disable automatic XSRF guard. */
+	protected $_xsrf_guard_enable;
+
+	/** Xsrf_guard instance. */
+	protected $_xsrf_guard;
+
+	/** XSRF guard form field name. */
+	protected $_xsrf_guard_field_name;
+
+	/** XSRF guard secret key. */
+	protected $_xsrf_guard_key;
 
 	/** Form action. */
 	public $form_action = '';
@@ -167,9 +200,9 @@ abstract class Form extends Validatable
 	public function __construct( $template_dir = null )
 	{
 		if ( $template_dir )
-			$this->template_dir = $template_dir;
+			$this->_template_dir = $template_dir;
 		else
-			$this->template_dir = self::$default_template_dir;
+			$this->_template_dir = self::$default_template_dir;
 
 		if ( !$this->_fields )
 			$this->_fields = $this->fields();
@@ -183,6 +216,17 @@ abstract class Form extends Validatable
 		foreach ( $this->_fields as $name => $spec ) {
 			$this->_init_field( $name );
 		}
+
+		# xsrf guarding
+		$this->_xsrf_guard_enable = self::$default_xsrf_guard_enable;
+
+		if ( self::$default_xsrf_guard )
+			$this->_xsrf_guard = self::$default_xsrf_guard;
+		else
+			$this->_xsrf_guard = self::default_xsrf_guard();
+
+		$this->_xsrf_guard_key = self::$default_xsrf_guard_key;
+		$this->_xsrf_guard_field_name = self::$default_xsrf_guard_field_name;
 
 		parent::__construct();
 	}
@@ -249,6 +293,77 @@ abstract class Form extends Validatable
 		}
 	}
 
+	/**
+	 * Is first field? Hiddens don't count.
+	 */
+	protected function is_first( $field_name, $field_order )
+	{
+		reset( $field_order );
+		while ( list( $key, $name ) = each( $field_order ) ) {
+			$field =& $this->_check_exists( $name );
+			if ( !isset( $field['render_as'] ) || $field['render_as'] != 'hidden' )
+				break;
+		}
+
+		# each()-above advances array pointer one step too far, thus prev()
+		# !$p takes care of special cases w/ only one element in $field_order
+		$p = prev( $field_order );
+		return !$p || $p == $field_name;
+	}
+
+	/**
+	 * Is last field? Hiddens don't count.
+	 */
+	protected function is_last( $field_name, $field_order )
+	{
+		return $this->is_first( $field_name, array_reverse( $field_order ) );
+	}
+
+	/**
+	 * Enables/disables automatic XSRF-guarding.
+	 */
+	public function xsrf_guard_enable( $enable = null )
+	{
+		$enable !== null and
+			$this->_xsrf_guard_enable = $enable;
+
+		return $this->_xsrf_guard_enable;
+	}
+
+	/**
+	 * Sets/gets the Xsrf_guard to use for XSRF-guarding.
+	 */
+	public function xsrf_guard( $xsrf_guard = null )
+	{	
+		$xsrf_guard and
+			$this->_xsrf_guard = $xsrf_guard;
+
+		return $this->_xsrf_guard;
+	}
+
+	/**
+	 * Sets/gets the form field name to use for the XSRF guard. Default field
+	 * name is '__xsrf_guard'.
+	 */
+	public function xsrf_guard_field_name( $f = null )
+	{
+		$f and
+			$this->_xsrf_guard_field_name = $f;
+
+		return $this->_xsrf_guard_field_name;
+	}
+
+	/**
+	 * Sets/gets the XSRF key to use.
+	 */
+	public function xsrf_guard_key( $key = null )
+	{
+		$key and
+			$this->_xsrf_guard_key = $key;
+
+		return $this->_xsrf_guard_key;
+	}
+
 	#
 	# Helpers
 	#
@@ -308,6 +423,30 @@ abstract class Form extends Validatable
 	}
 
 	/**
+	 * Initializes the automagic XSRF guard.
+	 */
+	protected function _init_xsrf_guard()
+	{
+		$fn = $this->xsrf_guard_field_name();
+
+		if ( $this->xsrf_guard_enable() ) {
+			$this->_xsrf_guard->key( $this->xsrf_guard_key() );
+			$field = array(
+				'type' => 'xsrf_guard',
+				'default' => 'this:value_xsrf_guard',
+				'render_as' => 'hidden',
+			);
+			$this->_fields[$fn] = $field;
+			# must init field explicitly, since field init might have been done 
+			# already
+			$this->_init_field( $fn );
+			parent::_init_attrdef( $fn );
+		} elseif ( isset( $this->_fields[$fn] ) ) {
+			unset( $this->_fields[$fn] );
+		}
+	}
+
+	/**
 	 * Returns renderer callback for given field.
 	 *
 	 * The renderer is determined as such:
@@ -336,6 +475,46 @@ abstract class Form extends Validatable
 	}
 
 	#
+	# XSRF guard
+	#
+
+	/**
+	 * Default value for auto XSRF guard.
+	 */
+	protected function value_xsrf_guard()
+	{
+		$x = $this->xsrf_guard();
+		if ( $x )
+			return $x->token();
+	}
+
+	/**
+	 * Validates auto XSRF guard.
+	 */
+	protected function validator_xsrf_guard( $self, $field, $value )
+	{
+		$x = $self->xsrf_guard();
+		if ( $x )
+			return $x->validate( $value );
+	}
+
+
+	#
+	# Validation
+	#
+	
+	/**
+	 * Validates this form.
+	 */
+	public function validate( $attr_name = null )
+	{
+		# auto XSRF guard settings might have changed since field init
+		$this->_init_xsrf_guard();
+		return parent::validate( $attr_name );
+	}
+	
+
+	#
 	# Rendering
 	#
 	
@@ -344,6 +523,9 @@ abstract class Form extends Validatable
 	 */
 	public function render( $ctxt = array() )
 	{
+		# auto XSRF guard settings might have changed since field init
+		$this->_init_xsrf_guard();
+
 		$res = '';
 		$fieldsets = $this->fieldsets_order();
 		if ( $fieldsets ) {
@@ -355,12 +537,10 @@ abstract class Form extends Validatable
 				$res .= $this->render_fieldset( $f_name, $ctxt );
 			}
 		} else {
-			$i = 0;
 			$fields = $this->fields_order();
-			$c = count( $fields );
 			foreach ( $fields as $name ) {
-				$ctxt['first'] = !$i++;
-				$ctxt['last'] = $i == $c;
+				$ctxt['first'] = $this->is_first( $name, $fields );
+				$ctxt['last'] = $this->is_last( $name, $fields );
 				$res .= $this->render_field( $name, $ctxt );
 			}
 		}
@@ -418,20 +598,17 @@ abstract class Form extends Validatable
 
 		# need counters to tell which fieldsets are first and last in form
 		$f_res = '';
-		$i = 0;
 		$fields = array_map( 'trim', $fields );
-		$c = count( $fields );
-
 		foreach ( $fields as $name ) {
-			$ctxt['first'] = !$i++;
-			$ctxt['last'] = $i == $c;
+			$ctxt['first'] = $this->is_first( $name, $fields );
+			$ctxt['last'] = $this->is_last( $name, $fields );
 			$f_res .= $this->render_field( $name, $ctxt );
 		}
 
 		# wrap in fieldset
 		if ( $fieldset['render_in_fieldset'] ) {
 			$ctxt['fieldset_content'] = $f_res;
-			return Tpl::create( 'fieldset.html.php', $ctxt, $this->template_dir )->get();
+			return Tpl::create( 'fieldset.html.php', $ctxt, $this->_template_dir )->get();
 		} else {
 			return $f_res;
 		}	
@@ -449,7 +626,7 @@ abstract class Form extends Validatable
 			'value' => $val,
 			'error' => $self->error( $field['field_name'] ),
 		);
-		return Tpl::create( $tpl, $ctxt, $this->template_dir )->get();
+		return Tpl::create( $tpl, $ctxt, $this->_template_dir )->get();
 	}
 
 	/** Renders text input. */
@@ -529,6 +706,20 @@ abstract class Form extends Validatable
 			'accept_charset' => $this->form_accept_charset,
 		);
 
-		return Tpl::create( 'form.html.php', $ctxt, $this->template_dir )->get();
+		return Tpl::create( 'form.html.php', $ctxt, $this->_template_dir )->get();
+	}
+
+	#
+	# Statics
+	#
+
+	/**
+	 * Returns the default Xsrf_guard to use if no default is present in
+	 * self::$default_xsrf_guard
+	 */
+	protected static function default_xsrf_guard()
+	{
+		$x = new Xsrf_guard();
+		return $x;
 	}
 }

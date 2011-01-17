@@ -18,7 +18,15 @@
 */
 
 /**
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
+ */
+
+/**
  * Validation error.
+ *
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
  */
 class Validation_error extends Exception
 {

@@ -18,6 +18,13 @@
 */
 
 /**
+ * Attr_controllable - object with tweaked __get/__call behavior.
+ *
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
+ */
+
+/**
  * Object with tweaked __get/__call behavior.
  *
  * Shortly, unset properties will return null, and calls to undefined
@@ -28,6 +35,9 @@
  *
  *	1. Misspelling of property names might go unnoticed.
  *	2. Misspelling of method names might go unnoticed.
+ *	
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
  */
 class Attr_controllable 
 {

@@ -1,0 +1,1919 @@
+<html>
+<head>
+<title>Docs For Class Form</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">form</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                              		  [ <a href="../classtrees_form.html" class="menu">class tree: form</a> ]
+		  [ <a href="../elementindex_form.html" class="menu">index: form</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_form.html">form</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../form/_form---Attr_controllable.php.html">		Attr_controllable.php
+		</a><br>
+			<a href="../form/_form---tpl---checkbox.html.php.html">		checkbox.html.php
+		</a><br>
+			<a href="../form/_form---tpl---checkboxes.html.php.html">		checkboxes.html.php
+		</a><br>
+			<a href="../form/_form---tpl---email_field.html.php.html">		email_field.html.php
+		</a><br>
+			<a href="../form/_form---tpl---fieldset.html.php.html">		fieldset.html.php
+		</a><br>
+			<a href="../form/_form---tpl---file_field.html.php.html">		file_field.html.php
+		</a><br>
+			<a href="../form/_form---tpl---form.html.php.html">		form.html.php
+		</a><br>
+			<a href="../form/_form.php.html">		form.php
+		</a><br>
+			<a href="../form/_form---Form.php.html">		Form.php
+		</a><br>
+			<a href="../form/_form---tpl---hidden_field.html.php.html">		hidden_field.html.php
+		</a><br>
+			<a href="../form/_form---tpl---password_field.html.php.html">		password_field.html.php
+		</a><br>
+			<a href="../form/_form---tpl---radio.html.php.html">		radio.html.php
+		</a><br>
+			<a href="../form/_form---tpl---select.html.php.html">		select.html.php
+		</a><br>
+			<a href="../form/_form---std.php.html">		std.php
+		</a><br>
+			<a href="../form/_form---tpl---submit.html.php.html">		submit.html.php
+		</a><br>
+			<a href="../form/_form---tpl---textarea.html.php.html">		textarea.html.php
+		</a><br>
+			<a href="../form/_form---tpl---text_field.html.php.html">		text_field.html.php
+		</a><br>
+			<a href="../form/_form---Tpl.php.html">		Tpl.php
+		</a><br>
+			<a href="../form/_form---Validatable.php.html">		Validatable.php
+		</a><br>
+			<a href="../form/_form---Validation_error.php.html">		Validation_error.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../form/Attr_controllable.html">Attr_controllable</a><br />
+	    		<a href="../form/Form.html">Form</a><br />
+	    		<a href="../form/Tpl.html">Tpl</a><br />
+	    		<a href="../form/Validatable.html">Validatable</a><br />
+	    		<a href="../form/Validation_error.html">Validation_error</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: Form</h1>
+Source Location: /form/Form.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../form/Attr_controllable.html">Attr_controllable</a>
+   |
+   --<a href="../form/Validatable.html">Validatable</a>
+      |
+      --Form</pre><br />
+<div class="description">Form base.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>David Högberg &lt;<a href="mailto:david@hgbrg.se">david@hgbrg.se</a>&gt;</li>
+            </ul>
+
+
+
+
+        
+
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../form/Form.html#var$default_template_dir">$default_template_dir</a></li>
+    <li><a href="../form/Form.html#var$form_accept_charset">$form_accept_charset</a></li>
+    <li><a href="../form/Form.html#var$form_action">$form_action</a></li>
+    <li><a href="../form/Form.html#var$form_enctype">$form_enctype</a></li>
+    <li><a href="../form/Form.html#var$form_method">$form_method</a></li>
+    <li><a href="../form/Form.html#var$template_dir">$template_dir</a></li>
+    <li><a href="../form/Form.html#var$_fields">$_fields</a></li>
+    <li><a href="../form/Form.html#var$_fieldsets">$_fieldsets</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../form/Form.html#method__construct">__construct</a></li>
+    <li><a href="../form/Form.html#methoddefault_abort">default_abort</a></li>
+    <li><a href="../form/Form.html#methoddefault_submit">default_submit</a></li>
+    <li><a href="../form/Form.html#methodfields">fields</a></li>
+    <li><a href="../form/Form.html#methodfieldsets">fieldsets</a></li>
+    <li><a href="../form/Form.html#methodfieldsets_order">fieldsets_order</a></li>
+    <li><a href="../form/Form.html#methodfields_order">fields_order</a></li>
+    <li><a href="../form/Form.html#methodfield_default">field_default</a></li>
+    <li><a href="../form/Form.html#methodfield_info">field_info</a></li>
+    <li><a href="../form/Form.html#methodhas_field">has_field</a></li>
+    <li><a href="../form/Form.html#methodrender">render</a></li>
+    <li><a href="../form/Form.html#methodrender_checkbox">render_checkbox</a></li>
+    <li><a href="../form/Form.html#methodrender_checkboxes">render_checkboxes</a></li>
+    <li><a href="../form/Form.html#methodrender_email">render_email</a></li>
+    <li><a href="../form/Form.html#methodrender_field">render_field</a></li>
+    <li><a href="../form/Form.html#methodrender_fieldset">render_fieldset</a></li>
+    <li><a href="../form/Form.html#methodrender_file">render_file</a></li>
+    <li><a href="../form/Form.html#methodrender_hidden">render_hidden</a></li>
+    <li><a href="../form/Form.html#methodrender_password">render_password</a></li>
+    <li><a href="../form/Form.html#methodrender_radio">render_radio</a></li>
+    <li><a href="../form/Form.html#methodrender_select">render_select</a></li>
+    <li><a href="../form/Form.html#methodrender_submit">render_submit</a></li>
+    <li><a href="../form/Form.html#methodrender_text">render_text</a></li>
+    <li><a href="../form/Form.html#methodrender_textarea">render_textarea</a></li>
+    <li><a href="../form/Form.html#methodsource">source</a></li>
+    <li><a href="../form/Form.html#method_init_field">_init_field</a></li>
+    <li><a href="../form/Form.html#method_renderer">_renderer</a></li>
+    <li><a href="../form/Form.html#method_render_form">_render_form</a></li>
+    <li><a href="../form/Form.html#method_render_template">_render_template</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../form/Validatable.html">Validatable</a></h4>
+<dl>
+<dt>
+  <a href="../form/Validatable.html#var$_attrdefs">Validatable::$_attrdefs</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../form/Validatable.html#var$_errors">Validatable::$_errors</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+<div class="tags">
+<h4>Class: <a href="../form/Attr_controllable.html">Attr_controllable</a></h4>
+<dl>
+<dt>
+  <a href="../form/Attr_controllable.html#var$_acts_as_map">Attr_controllable::$_acts_as_map</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../form/Validatable.html">Validatable</a></h4>
+<dl>
+    <dt>
+    <a href="../form/Validatable.html#method__construct">Validatable::__construct()</a>
+  </dt>
+  <dd>
+    Creates a new Validatable.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodadd_errors">Validatable::add_errors()</a>
+  </dt>
+  <dd>
+    Adds given errors.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodadd_validator">Validatable::add_validator()</a>
+  </dt>
+  <dd>
+    Adds a validator to given attribute, optionally with an identifying name.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodattrdef">Validatable::attrdef()</a>
+  </dt>
+  <dd>
+    Sets/get attribute definition for given attribute.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodattrdefs">Validatable::attrdefs()</a>
+  </dt>
+  <dd>
+    Returns array with attribute definitions.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodattrdef_default">Validatable::attrdef_default()</a>
+  </dt>
+  <dd>
+    Default attribute definition. All fields not set in the definition for  attrs will be set according to these default values.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoddel_validator">Validatable::del_validator()</a>
+  </dt>
+  <dd>
+    Removes named validator.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg">Validatable::errmsg()</a>
+  </dt>
+  <dd>
+    Default error message.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_bool">Validatable::errmsg_bool()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail boolean validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_email">Validatable::errmsg_email()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail e-mail validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_empty">Validatable::errmsg_empty()</a>
+  </dt>
+  <dd>
+    Error message for empty attributes that are required to not be empty.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_int">Validatable::errmsg_int()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail integer validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_num">Validatable::errmsg_num()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail numeric validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_regexp">Validatable::errmsg_regexp()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail regexp validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_string">Validatable::errmsg_string()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail string validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_timestamp">Validatable::errmsg_timestamp()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail timestamp validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrmsg_url">Validatable::errmsg_url()</a>
+  </dt>
+  <dd>
+    Error message for attributes that fail URL validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderror">Validatable::error()</a>
+  </dt>
+  <dd>
+    Returns error message for given attribute, null if none.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methoderrors">Validatable::errors()</a>
+  </dt>
+  <dd>
+    Sets/gets current errors as associative array attr_name =&gt; error msg
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodis_valid">Validatable::is_valid()</a>
+  </dt>
+  <dd>
+    Performs validation and returns true iff object is valid.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidate">Validatable::validate()</a>
+  </dt>
+  <dd>
+    Performs validation. Throws a Validation_error on validation failure, true  on success.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidators">Validatable::validators()</a>
+  </dt>
+  <dd>
+    Sets/gets validators for given attribute.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_bool">Validatable::validator_bool()</a>
+  </dt>
+  <dd>
+    Validates bool.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_email">Validatable::validator_email()</a>
+  </dt>
+  <dd>
+    Validates e-mail.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_empty">Validatable::validator_empty()</a>
+  </dt>
+  <dd>
+    Validates empty (ensures that attr is non-empty)
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_int">Validatable::validator_int()</a>
+  </dt>
+  <dd>
+    Validates int.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_num">Validatable::validator_num()</a>
+  </dt>
+  <dd>
+    Validates numeric.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_regexp">Validatable::validator_regexp()</a>
+  </dt>
+  <dd>
+    Validates regexp.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_string">Validatable::validator_string()</a>
+  </dt>
+  <dd>
+    Validates string.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_timestamp">Validatable::validator_timestamp()</a>
+  </dt>
+  <dd>
+    Validates timestamp.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#methodvalidator_url">Validatable::validator_url()</a>
+  </dt>
+  <dd>
+    Validates URL.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_check_exists">Validatable::_check_exists()</a>
+  </dt>
+  <dd>
+    Checks if attr exists and returns if so.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_do_validate">Validatable::_do_validate()</a>
+  </dt>
+  <dd>
+    Performs the actual validation.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_errmsg">Validatable::_errmsg()</a>
+  </dt>
+  <dd>
+    Returns error message for given attribute and validator.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_get_or_call">Validatable::_get_or_call()</a>
+  </dt>
+  <dd>
+    Gets value as string or as result of callback.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_init_attrdef">Validatable::_init_attrdef()</a>
+  </dt>
+  <dd>
+    Initializes attr.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_validate_using">Validatable::_validate_using()</a>
+  </dt>
+  <dd>
+    Helper function for the type validators. Basically checks if the attribute  value is an array, and if so checks that all array entries are valid.
+  </dd>
+    <dt>
+    <a href="../form/Validatable.html#method_validators">Validatable::_validators()</a>
+  </dt>
+  <dd>
+    Returns validators for given attribute.
+  </dd>
+  </dl>
+<h4>Class: <a href="../form/Attr_controllable.html">Attr_controllable</a></h4>
+<dl>
+    <dt>
+    <a href="../form/Attr_controllable.html#methodact_as_map">Attr_controllable::act_as_map()</a>
+  </dt>
+  <dd>
+    Makes $this-&gt;$attr have $attr($k, $v = null) get/set behavior.
+  </dd>
+    <dt>
+    <a href="../form/Attr_controllable.html#method__call">Attr_controllable::__call()</a>
+  </dt>
+  <dd>
+    If $this-&gt;$func is set, call it. Else return it. Also deals with props  set to act as maps by $this-&gt;act_as_map().
+  </dd>
+    <dt>
+    <a href="../form/Attr_controllable.html#method__get">Attr_controllable::__get()</a>
+  </dt>
+  <dd>
+    Return null when trying to get attribute that has not been set.
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 49]<br />
+Form base.<br /><br /><p>Form is a lightweight framework for defining, validating and rendering  HTML forms.</p><p>In it's simplest form:</p><p>class Simple_form extends Form    {      protected function fields()      {        return array(          'name' =&gt; array(            'required' =&gt; true,           ),           'submit' =&gt; true,        ),      }    }</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>David Högberg &lt;<a href="mailto:david@hgbrg.se">david@hgbrg.se</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$default_template_dir"></a>
+	<p></p>
+	<h4>static $default_template_dir = <span class="value">&nbsp;''</span></h4>
+	<p>[line 52]</p>
+  Default template directory.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$form_accept_charset"></a>
+	<p></p>
+	<h4>$form_accept_charset = <span class="value">&nbsp;''</span></h4>
+	<p>[line 64]</p>
+  Form accept-charset.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$form_action"></a>
+	<p></p>
+	<h4>$form_action = <span class="value">&nbsp;''</span></h4>
+	<p>[line 58]</p>
+  Form action.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$form_enctype"></a>
+	<p></p>
+	<h4>$form_enctype = <span class="value">&nbsp;''</span></h4>
+	<p>[line 67]</p>
+  Form enctype.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$form_method"></a>
+	<p></p>
+	<h4>$form_method = <span class="value">&nbsp;'post'</span></h4>
+	<p>[line 61]</p>
+  Form method.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$template_dir"></a>
+	<p></p>
+	<h4>$template_dir = <span class="value"></span></h4>
+	<p>[line 55]</p>
+  Template directory.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$_fields"></a>
+	<p></p>
+	<h4>$_fields = <span class="value">array()</span></h4>
+	<p>[line 72]</p>
+  Holds field definitions.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$_fieldsets"></a>
+	<p></p>
+	<h4>$_fieldsets = <span class="value">array()</span></h4>
+	<p>[line 79]</p>
+  Holds fieldsets as an associative array:<br /><br /><p>fieldset name =&gt; array with field names</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 175]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>Form __construct(
+[
+$template_dir = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Creates a new Form.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../form/Validatable.html#method__construct">Validatable::__construct()</a> (Creates a new Validatable.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$template_dir</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoddefault_abort"></a>
+	<h3>method default_abort <span class="smalllinenumber">[line 213]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void default_abort(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Default values for field named 'abort'.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoddefault_submit"></a>
+	<h3>method default_submit <span class="smalllinenumber">[line 201]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void default_submit(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Default values for field named 'submit'.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfields"></a>
+	<h3>method fields <span class="smalllinenumber">[line 127]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void fields(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns field definitions as an associative array:<br /><br /><p>field name =&gt; field definition</p><p>The field definition is an array with the following  possible keys:</p><p>name: string 	readable name 	defaults to uppercased field name w/ underscores =&gt; spaces</p><p>label: string 	readable label 	defaults to name</p><p>id: string 	HTML id 	defaults to field name</p><p>help_msg: string 	help message 	defaults to ''</p><p>add_default_def: bool 	if true, fill with preset default definition based on the field name. 	defaults to false</p><p>values: array or callback 	valid values, if applicable. for selects etc. 	defaults to null</p><p>value: mixed (callback allowed) 	value to use for field (for hidden fields and default values) 	defaults to null</p><p>render_as: string 	shorthand for specifying renderer ('select', 'file', 'checkbox' etc.) 	maps to a $this-&gt;renderer_&lt;value&gt;(). 	defaults to 'text'</p><p>renderer: string or callback 	specifies renderer to render the field with. if string, interpreted 	as a template filename. 	defaults to null (which will use the default render_as)</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfieldsets"></a>
+	<h3>method fieldsets <span class="smalllinenumber">[line 146]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void fieldsets(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns fieldsets for this form, as associative array<br /><br /><p>fieldset name =&gt; array with field names</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfieldsets_order"></a>
+	<h3>method fieldsets_order <span class="smalllinenumber">[line 155]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void fieldsets_order(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns array with fieldset names indicating fieldset order,  used when rendering.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfields_order"></a>
+	<h3>method fields_order <span class="smalllinenumber">[line 136]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void fields_order(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns array with field names indicating field order,  used when rendering.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfield_default"></a>
+	<h3>method field_default <span class="smalllinenumber">[line 163]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void field_default(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns default values to be added to each field.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfield_info"></a>
+	<h3>method field_info <span class="smalllinenumber">[line 228]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void field_info(
+
+$field, [
+$key = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns field info for given field and key.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td>$this-&gt;fields()</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$key</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodhas_field"></a>
+	<h3>method has_field <span class="smalllinenumber">[line 240]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void has_field(
+
+$field)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns true iff this form has a field named $field.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender"></a>
+	<h3>method render <span class="smalllinenumber">[line 353]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render(
+[
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders the form.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_checkbox"></a>
+	<h3>method render_checkbox <span class="smalllinenumber">[line 518]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_checkbox(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders checkbox.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_checkboxes"></a>
+	<h3>method render_checkboxes <span class="smalllinenumber">[line 524]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_checkboxes(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders multiple checkboxes.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_email"></a>
+	<h3>method render_email <span class="smalllinenumber">[line 470]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_email(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders e-mail input.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_field"></a>
+	<h3>method render_field <span class="smalllinenumber">[line 383]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_field(
+
+$field_name, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders a field<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field_name</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_fieldset"></a>
+	<h3>method render_fieldset <span class="smalllinenumber">[line 396]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_fieldset(
+
+$fieldset_name, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders a fieldset.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$fieldset_name</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_file"></a>
+	<h3>method render_file <span class="smalllinenumber">[line 500]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_file(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders file input.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_hidden"></a>
+	<h3>method render_hidden <span class="smalllinenumber">[line 494]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_hidden(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders hidden input.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_password"></a>
+	<h3>method render_password <span class="smalllinenumber">[line 476]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_password(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Render password input.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_radio"></a>
+	<h3>method render_radio <span class="smalllinenumber">[line 482]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_radio(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders radio buttons.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_select"></a>
+	<h3>method render_select <span class="smalllinenumber">[line 506]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_select(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders select input.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_submit"></a>
+	<h3>method render_submit <span class="smalllinenumber">[line 488]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_submit(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders submit button.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_text"></a>
+	<h3>method render_text <span class="smalllinenumber">[line 464]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_text(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders text input.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrender_textarea"></a>
+	<h3>method render_textarea <span class="smalllinenumber">[line 512]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void render_textarea(
+
+$form, 
+$field, 
+$val, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders textarea.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$form</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsource"></a>
+	<h3>method source <span class="smalllinenumber">[line 252]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void source(
+
+&$source)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Use given source for field values.<br /><br /><p>For example, for using POST data:</p><p>$form-&gt;source( $_POST );</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>&$source</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="method_init_field"></a>
+	<h3>method _init_field <span class="smalllinenumber">[line 274]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void _init_field(
+
+$field_name)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Initializes field with given name.<br /><br /><p>If field flag 'add_default_def' is true, default field flags  from $this-&gt;default_&lt;field name&gt;() will be merged to the field  (if the method exists). Already set flags will not be overwritten.</p><p>After merging as described above, default field flags will be  merged in the same way, using $this-&gt;field_defaults().</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field_name</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="method_renderer"></a>
+	<h3>method _renderer <span class="smalllinenumber">[line 329]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void _renderer(
+
+$field_name)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns renderer callback for given field.<br /><br /><p>The renderer is determined as such:</p><p><ol><li>Explicit renderer set by field flag 'renderer'.</li><li>Shorthand renderer set by field flag 'render_as'.
+     (mapped to $this-&gt;render_&lt;render_as&gt;), but only if
+     $this-&gt;render_field_&lt;field_name&gt;() does not exist.</li><li>No renderer set, use $this-&gt;render_field_&lt;field_name&gt;()</li></ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field_name</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="method_render_form"></a>
+	<h3>method _render_form <span class="smalllinenumber">[line 530]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void _render_form(
+
+$content, [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders the form wrapper.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$content</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="method_render_template"></a>
+	<h3>method _render_template <span class="smalllinenumber">[line 451]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void _render_template(
+
+$self, 
+$field, 
+$val, [
+$tpl = ''], [
+$ctxt = array()])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Renders given template.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$self</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$val</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$tpl</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ctxt</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Sat, 15 Jan 2011 19:31:01 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

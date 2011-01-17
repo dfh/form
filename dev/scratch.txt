@@ -215,3 +215,86 @@ _errmsg( $attr_name, $validator_name ):
 	4. def: errmsg
 
 errmsg( $attr, $validator_name = null ): returnerar felmeddelande
+
+
+--
+
+XSRF guard
+
+type 'xsrf_guard'
+-> validerar med self::$default_xsrf_guard
+
+Form::$default_xsrf_guard_enable = true;
+Form::$default_xsrf_guard = new Xsrf_guard(); # set timeout, secret etc. here
+Form::$default_xsrf_guard_field_name = '__xsrf_guard';
+
+props:
+	xsrf_guard_enable
+	xsrf_guard
+	xsrf_field_name
+
+i __construct:
+	sätt xsrf_guard_enable
+	sätt xsrf_guard (anv. $this->default_xsrf_guard() om $def.. ej satt)
+	sätt xsrf_field_name
+
+$form->xsrf_guard( $xsrf_guard );
+$form->xsrf_guard_enable( true );
+$form->xsrf_field_name( 'xsrf_field' );
+
+$form->default_xsrf_guard()
+	skapa ny Xsrf_guard med default-värden och returnera
+
+måste initieras när:
+
+	* render
+	* validate
+
+genom att köra:
+
+_init_xsrf_field()
+	om xsrf_guard_enable, skapa fält:
+		$this->xsrf_field_name() => array(
+			'type' => 'xsrf_guard',
+			'add_def_validators' => false,
+			'render_as' => 'xsrf_guard',
+		)
+
+validator_xsrf_guard()
+	hämta xsrf-guard ($this->xsrf_guard())
+	$token = $val
+	return $xsrf_guard->validate( $token )
+
+render_xsrf_guard()
+	hämta xsrf-guard ($this->xsrf_guard())
+	val: $xsrf_guard->token()
+	rendera som hidden med $this->xsrf_field_name()
+
+måste överlagra validate för initiering av xsrf-fält:
+validate( $attr_name = null )
+	_init_xsrf_field();
+	return parent::validate( $attr_name )
+
+alternativ:
+	rendera inte xsrf separat utan låt form-wrapper sätta dit. inte lika snyggt, dock.
+	logiskt sett borde det vara ett fält hos formuläret, som vilket annat hidden-fält som
+	helst. problemet är eg. rendering av hiddens så att de inte stör layout (first/last).
+
+--
+
+hur se till att hiddens inte stör rendering?
+
+använd is_first() & is_last() för att kolla om fält är först/sist:
+
+is_hidden( $field_name )
+	$field =& $this->_check_exists( $field_name );
+	return $field['render_as'] == 'hidden';
+
+is_first( $field_name, $field_order )
+	while ( list( $key, $name ) = each( $field_order ) )
+		if ( !$this->is_hidden( $name ) )
+			break;
+	return current( $field_order ) == $field_name;
+
+is_last( $field_name, $field_order )
+	return is_first( $field_name, array_reverse( $field_order ) )

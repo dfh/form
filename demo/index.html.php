@@ -38,4 +38,5 @@ To be written..
 	<li><a href="error_messages.php">Error messages</a></li>
 	<li><a href="rendering.php">Rendering</a></li>
 	<li><a href="fieldsets.php">Fieldsets</a></li>
+	<li><a href="xsrf_basic.php">Basic automagic XSRF guard</a></li>
 </ul>

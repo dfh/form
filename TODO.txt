@@ -2,3 +2,4 @@ TODO
 
 * Allow for callbacks when defining values. By using $this->_values( $field_name )?
 * Automagic XSRF protection
+* Document PUT/DELETE via POST (sets _use_http_put|delete)

@@ -17,11 +17,17 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
+ */
+
 require dirname( __FILE__ ) . '/form/std.php';
 require dirname( __FILE__ ) . '/form/Attr_controllable.php';
 require dirname( __FILE__ ) . '/form/Validation_error.php';
 require dirname( __FILE__ ) . '/form/Validatable.php';
 require dirname( __FILE__ ) . '/form/Tpl.php';
+require dirname( __FILE__ ) . '/form/Xsrf_guard.php';
 require dirname( __FILE__ ) . '/form/Form.php';
 
 /** Default templates. */

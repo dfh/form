@@ -18,6 +18,11 @@
 */
 
 /**
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
+ */
+
+/**
  * An object that can be validated.
  *
  * A Validatable object has one or more attributes (class properties)
@@ -100,6 +105,9 @@
  *
  * In addition to this, default type validators and error messages can be
  * set by extending classes by overriding validator_*() and errmsg_*() methods.
+ *
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
  */
 class Validatable extends Attr_controllable
 {
@@ -229,6 +237,7 @@ class Validatable extends Attr_controllable
 	public function validate( $attr_name = null )
 	{
 		debug( 'validatable: validating..' );
+
 
 		$attrs =& $this->_attrdefs;
 		if ( $attr_name )

@@ -18,6 +18,11 @@
 */
 
 /**
+ * @author David Högberg <david@hgbrg.se>
+ * @package form
+ */
+
+/**
  * Tpl - A minimalistic templating engine.
  *
  * Rendering is done bottom-first. Meaning context can be set in inner 
