@@ -22,11 +22,14 @@ For special cases, Form is very flexible. It allows you to use custom callbacks 
 Unfortunately, there is no documentation written yet. However, the source is pretty well commented, and the demos should cover most normal uses and get you started.
 </p>
 
-<h2>Source code</h2>
+<h2>License</h2>
 
 <p>
 Form is licensed under <a href="http://www.gnu.org/licenses/gpl-3.0.html">GPLv3</a>/<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> (use whichever one you like).
 </p>
+
+<h2>Source code</h2>
+
 <p>
 The latest sources can be downloaded from <a href="http://github.com/dfh/form">Github</a>.
 </p>
