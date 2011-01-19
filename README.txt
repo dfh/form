@@ -28,9 +28,7 @@ radio buttons, textareas etc., and defining custom rendering is simple.
 Error messages are designed to be sensible by default, and easy to customize.
 
 See "Installation and usage" below for a very minimal example. Check out the
-demos at http://david.hgbrg.se/form/ for a quick overview, or read the full
-documentation available in the doc/ folder or online at the Github page
-(http://github.com/dfh/form/).
+demos at http://david.hgbrg.se/form/doc/ for a quick overview.
 
 
 INSTALLATION AND USAGE

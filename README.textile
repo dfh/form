@@ -18,7 +18,7 @@ The same goes for rendering standard input fields; there is built-in support for
 
 Error messages are designed to be sensible by default, and easy to customize.
 
-See "Installation and usage" below for a very minimal example. Check out the "demos":http://david.hgbrg.se/form/ for a quick overview, or read the full documentation available in the doc/ folder or online at the "Github page":http://github.com/dfh/form/.
+See "Installation and usage" below for a very minimal example. Check out the "demos":http://david.hgbrg.se/form/doc/ for a quick overview.
 
 h2. Requirements
 
