@@ -24,11 +24,12 @@
 
 require dirname( __FILE__ ) . '/form/std.php';
 require dirname( __FILE__ ) . '/form/Attr_controllable.php';
-require dirname( __FILE__ ) . '/form/Validation_error.php';
 require dirname( __FILE__ ) . '/form/Validatable.php';
 require dirname( __FILE__ ) . '/form/Tpl.php';
-require dirname( __FILE__ ) . '/form/Xsrf_guard.php';
 require dirname( __FILE__ ) . '/form/Form.php';
+
+require dirname( __FILE__ ) . '/Validation_error.php';
+require dirname( __FILE__ ) . '/Xsrf_guard.php';
 
 /** Default templates. */
 Form::$default_template_dir = dirname( __FILE__ ) . '/form/tpl/';

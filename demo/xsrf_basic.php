@@ -21,8 +21,9 @@ class Xsrf_protected_form extends Form
 	}
 }
 
-Form::$default_xsrf_guard_enable = true;
-Form::$default_xsrf_guard_key = 'hej';
+$guard = new Xsrf_guard();
+$guard->key( 'supersecret' );
+Form::$default_xsrf_guard = $guard;
 
 $form = new Xsrf_protected_form();
 $msg = '';

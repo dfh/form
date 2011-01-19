@@ -51,17 +51,11 @@ abstract class Form extends Validatable
 	/** Default template directory. */
 	public static $default_template_dir = '';
 
-	/** Enable/disable automagic XSRF guard by default? */
-	public static $default_xsrf_guard_enable = false;
-
 	/** Default Xsrf_guard. If none, self::default_xsrf_guard() will be used. */
 	public static $default_xsrf_guard = null;
 
 	/** Default XSRF form field name to use. */
 	public static $default_xsrf_guard_field_name = '__xsrf_guard';
-
-	/** Default XSRF guard secret key. */
-	public static $default_xsrf_guard_key = '';
 
 
 	/** Template directory. */
@@ -218,15 +212,8 @@ abstract class Form extends Validatable
 		}
 
 		# xsrf guarding
-		$this->_xsrf_guard_enable = self::$default_xsrf_guard_enable;
-
-		if ( self::$default_xsrf_guard )
-			$this->_xsrf_guard = self::$default_xsrf_guard;
-		else
-			$this->_xsrf_guard = self::default_xsrf_guard();
-
-		$this->_xsrf_guard_key = self::$default_xsrf_guard_key;
-		$this->_xsrf_guard_field_name = self::$default_xsrf_guard_field_name;
+		$this->xsrf_guard( self::$default_xsrf_guard );
+		$this->xsrf_guard_field_name( self::$default_xsrf_guard_field_name );
 
 		parent::__construct();
 	}
@@ -320,17 +307,6 @@ abstract class Form extends Validatable
 	}
 
 	/**
-	 * Enables/disables automatic XSRF-guarding.
-	 */
-	public function xsrf_guard_enable( $enable = null )
-	{
-		$enable !== null and
-			$this->_xsrf_guard_enable = $enable;
-
-		return $this->_xsrf_guard_enable;
-	}
-
-	/**
 	 * Sets/gets the Xsrf_guard to use for XSRF-guarding.
 	 */
 	public function xsrf_guard( $xsrf_guard = null )
@@ -351,17 +327,6 @@ abstract class Form extends Validatable
 			$this->_xsrf_guard_field_name = $f;
 
 		return $this->_xsrf_guard_field_name;
-	}
-
-	/**
-	 * Sets/gets the XSRF key to use.
-	 */
-	public function xsrf_guard_key( $key = null )
-	{
-		$key and
-			$this->_xsrf_guard_key = $key;
-
-		return $this->_xsrf_guard_key;
 	}
 
 	#
@@ -429,8 +394,7 @@ abstract class Form extends Validatable
 	{
 		$fn = $this->xsrf_guard_field_name();
 
-		if ( $this->xsrf_guard_enable() ) {
-			$this->_xsrf_guard->key( $this->xsrf_guard_key() );
+		if ( $this->xsrf_guard() ) {
 			$field = array(
 				'type' => 'xsrf_guard',
 				'default' => 'this:value_xsrf_guard',
@@ -707,19 +671,5 @@ abstract class Form extends Validatable
 		);
 
 		return Tpl::create( 'form.html.php', $ctxt, $this->_template_dir )->get();
-	}
-
-	#
-	# Statics
-	#
-
-	/**
-	 * Returns the default Xsrf_guard to use if no default is present in
-	 * self::$default_xsrf_guard
-	 */
-	protected static function default_xsrf_guard()
-	{
-		$x = new Xsrf_guard();
-		return $x;
 	}
 }

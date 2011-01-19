@@ -9,8 +9,10 @@ $this->title = 'Basic XSRF protection';
 <h1>Demo: Basic XSRF-protected form</h1>
 
 <p>
-	This is a demo of the auto-magic built-in XSRF (Cross-Site Request Forgery) protection in Form. Try out the form below or skip to the <a href="#source">source code below</a>.
+	This is a demo of how to do (Cross-Site Request Forgery) protection in Form. Try out the form below or skip to the <a href="#source">source code below</a>.
 </p>
+<p>
+The class <code>Xsrf_guard</code> used for XSRF guarding is a standalone class. Read more about it at <a href="http://github.com/dfh/xsrf_guard/">http://github.com/dfh/xsrf_guard</a>.
 
 <?php if ( $this->msg ): ?>
 <div class="msg">
@@ -36,19 +38,23 @@ For more information on creating forms, validating and rendering them, see <a hr
 </p>
 
 <pre class="lang-php"><code class="lang-php"><?= htmlspecialchars( <<<EOT
-/** A very simple form. */
-class Simple_form extends Form
+/**
+ * An XSRF-protected form.
+ */
+class Xsrf_protected_form extends Form
 {
 	/** Returns a definition of the fields of this form. */
 	protected function fields()
 	{
 		return array(
-			'name' => array(
-				'required' => true, # client is required to fill in this field
-			),
+			'name' => array(),
 			'submit' => true,
 		);
 	}
 }
+
+\$guard = new Xsrf_guard();
+\$guard->key( 'supersecret' );
+Form::\$default_xsrf_guard = \$guard;
 EOT
 ); ?></code></pre>

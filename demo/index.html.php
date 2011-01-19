@@ -10,7 +10,16 @@ A framework for defining, validating and rendering HTML forms.
 <h2>Overview</h2>
 
 <p>
-To be written..
+Form is at it's core a PHP class named <code>Form</code>. When making a form to use on a web page, you simply extend this class, and implement a method that returns an array describing the fields of the form. This field description, or field definition, specifies the names of the fields, their default values (if any), how they should be validated and how they should be rendered.
+</p>
+<p>
+Form has built-in support for validation and rendering of most normal fields like text input, select dropdowns, radio buttons, checkboxes, textareas etc.
+</p>
+<p>
+For special cases, Form is very flexible. It allows you to use custom callbacks for default values, validation and rendering, in several different ways. Check out the <a href="#demos">demos</a> to see how to do it.
+</p>
+<p>
+Unfortunately, there is no documentation written yet. However, the source is pretty well commented, and the demos should cover most normal uses and get you started.
 </p>
 
 <h2>Source code</h2>
@@ -28,7 +37,7 @@ The latest sources can be downloaded from <a href="http://github.com/dfh/form">G
 To be written..
 </p>
 
-<h2>Demos</h2>
+<h2 id="demos">Demos</h2>
 
 <ul>
 	<li><a href="basic.php">Basics</a></li>
@@ -38,5 +47,5 @@ To be written..
 	<li><a href="error_messages.php">Error messages</a></li>
 	<li><a href="rendering.php">Rendering</a></li>
 	<li><a href="fieldsets.php">Fieldsets</a></li>
-	<li><a href="xsrf_basic.php">Basic automagic XSRF guard</a></li>
+	<li><a href="xsrf_basic.php">Basic XSRF protection</a></li>
 </ul>

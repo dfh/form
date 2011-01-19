@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Basic';
+$this->title = 'Overview';
 ?>
 
 <p class="nav">
