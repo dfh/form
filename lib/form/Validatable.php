@@ -19,7 +19,6 @@
 
 /**
  * @author David Högberg <david@hgbrg.se>
- * @package form
  */
 
 /**
@@ -109,7 +108,7 @@
  * @author David Högberg <david@hgbrg.se>
  * @package form
  */
-class Validatable extends Attr_controllable
+class Validatable
 {
 	/** Attribute definitions. */
 	protected $_attrdefs = array();
@@ -131,15 +130,17 @@ class Validatable extends Attr_controllable
 	 * Default attribute definition. All fields not set in the definition for
 	 * attrs will be set according to these default values.
 	 */
-	protected function attrdef_default()
+	protected function attrdef_default( $attr_name )
 	{
 		return array(
 			'type' => 'string',
+			'add_default_def' => true,
 			'add_def_validators' => true,
 			'required' => false,
 			'min' => null,
 			'max' => null,
 			'validators' => array(),
+			'name' => ucfirst( $attr_name ),
 		);
 	}
 
@@ -148,11 +149,24 @@ class Validatable extends Attr_controllable
 	 */
 	public function __construct()
 	{
-		if ( !$this->_attrdefs )
+		if ( !$this->_attrdefs ) 
 			$this->_attrdefs = $this->attrdefs();
 
 		foreach ( $this->_attrdefs as $name => & $attr ) {
 			$this->_init_attrdef( $name );
+		}
+	}
+
+	/**
+	 * Returns all attributes.
+	 */
+	protected function & _attrdefs( $attr_name = null )
+	{
+		if ( $attr_name ) {
+			$a = array( $attr_name => $this->_attrdefs[$attr_name] );
+			return $a;
+		} else {
+			return $this->_attrdefs;
 		}
 	}
 
@@ -165,6 +179,14 @@ class Validatable extends Attr_controllable
 			$this->_attrdefs[$attr_name] = $attrdef;
 	
 		return $this->_attrdefs[$attr_name];
+	}
+
+	/**
+	 * True iff this model has given $attr.
+	 */
+	public function has_attr( $attr )
+	{
+		return isset( $this->_attrs[$attr] );
 	}
 
 	/**
@@ -238,12 +260,7 @@ class Validatable extends Attr_controllable
 	{
 		debug( 'validatable: validating..' );
 
-
-		$attrs =& $this->_attrdefs;
-		if ( $attr_name )
-			$attrs = array( $attr_name => $this->_attrdefs[$attr_name] );
-
-		foreach ( $attrs as $n => $a ) {
+		foreach ( $this->_attrdefs( $attr_name ) as $n => $a ) {
 			try {
 				$this->_do_validate( $n );
 			} catch ( Validation_error $e ) {
@@ -301,9 +318,19 @@ class Validatable extends Attr_controllable
 	#
 	# helpers
 	#
+
+	/**
+	 * Initializes given attribute. Override as needed.
+	 */
+	protected function init_attr( & $attr ) {}
 	
 	/**
 	 * Initializes attr.
+	 *
+	 * Calls $this->default_<attr_name>() if flag add_default_def is true.
+	 *
+	 * Calls $this->init_attr( & $attr ) when done, for children to add
+	 * their own defaults.
 	 */
 	protected function _init_attrdef( $attr_name )
 	{
@@ -312,16 +339,24 @@ class Validatable extends Attr_controllable
 		# save name shortcut in 'attr_name'
 		$attr['attr_name'] = $attr_name;
 
-		# name
-		if ( !isset( $attr['name'] ) )
-			$attr['name'] = ucfirst( $attr_name );
+		# merge in default attr values if told so
+		if (
+			!empty( $attr['add_default_def'] ) &&
+			method_exists( $this, 'default_' . $attr_name )
+		) {
+			$f = "default_${attr_name}";
+			$attr = array_merge( $this->$f(), $attr );
+		}
 
 		# add defaults
-		$attr = array_merge( $this->attrdef_default(), $attr );
+		$attr = array_merge( $this->attrdef_default( $attr_name ), $attr );
 
 		# enable shorthand 'validators' => array( 'validators' )
 		# also makes sure that validators is always an array
 		$attr['validators'] = (array) $attr['validators'];
+
+		# any other custom initialization
+		$this->init_attr( $attr );
 	}
 
 	/**
@@ -347,7 +382,7 @@ class Validatable extends Attr_controllable
 		$vs = $this->_validators( $attr_name );
 
 		foreach ( $vs as $n => $v ) {
-			$this->_get_or_call( $v, array( $this, $attr, $this->$attr_name ) );
+			$this->get_or_call( $v, array( $this, $attr, $this->$attr_name ) );
 		}
 
 		return true;
@@ -360,12 +395,13 @@ class Validatable extends Attr_controllable
 	 * name + method name, function closure etc.) or the magic callback string
 	 * 'this:<method>' that will be mapped to $this->method.
 	 */
-	protected function _get_or_call( $callback, $args = array() )
+	protected function get_or_call( $callback, $args = array() )
 	{
 		# magic 'this:'-callback?
 		if (
 			is_string( $callback ) &&
-			substr( $callback, 0, 5 ) == 'this:'
+			substr( $callback, 0, 5 ) == 'this:' &&
+			method_exists( $this, substr( $callback, 5 ) )
 		)
 			$callback = array( $this, substr( $callback, 5 ) );
 
@@ -441,17 +477,12 @@ class Validatable extends Attr_controllable
 		# def. errmsg_<validator_name> if validator name given
 		} elseif ( $validator_name && isset( $attr["errmsg_${validator_name}"] ) ) {
 			# might be callback
-			$msg = $this->_get_or_call( $attr["errmsg_${validator_name}"], array( $attr ) );
+			$msg = $this->get_or_call( $attr["errmsg_${validator_name}"], array( $attr ) );
 
 		# $this->errmsg_<validator_name>() if validator name given
 		} elseif ( $validator_name && method_exists( $this, "errmsg_${validator_name}" ) ) {
 			$f = "errmsg_${validator_name}";
 			$msg = $this->$f( $attr );
-
-		# def. errmsg if set
-		//} elseif ( isset( $attr['errmsg'] ) ) {
-			//# might be callback
-			//$msg = $this->_get_or_call( $attr["errmsg"], array( $attr ) );
 
 		# standard error message by default
 		} else {
@@ -521,81 +552,68 @@ class Validatable extends Attr_controllable
 	}
 
 	/**
-	 * Helper function for the type validators. Basically checks if the attribute 
-	 * value is an array, and if so checks that all array entries are valid.
+	 * Validates string.
 	 */
-	protected function _validate_using( $validator, $self, $attr, $val )
+	protected function validator_string( $self, $attr, $val )
 	{
-		# always true if null (TODO OK?)
-		if ( $val === null )
-			return true;
-
-		# (array) typecast for checking every value of $val if $val is array
 		foreach ( (array) $val as $v ) {
-			call_user_func( array( $this, $validator ), $self, $attr, $v, true );
+			if ( $val !== '' && !validate_string( $val, $attr['min'], $attr['max'] ) )
+				throw new Validation_error( $this->_errmsg( $attr, 'string' ) );
 		}
 
 		return true;
-	}
-
-	/**
-	 * Validates string.
-	 */
-	protected function validator_string( $self, $attr, $val, $perform = false )
-	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
-			if ( $val !== '' && !validate_string( $val, $attr['min'], $attr['max'] ) )
-				throw new Validation_error( $this->_errmsg( $attr, 'string' ) );
 	}	
 
 	/**
 	 * Validates e-mail.
 	 */
-	protected function validator_email( $self, $attr, $val, $perform = false )
+	protected function validator_email( $self, $attr, $val )
 	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
+		foreach ( (array) $val as $v ) {
 			if ( $val && !validate_email( $val ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'email' ) );
+		}
+
+		return true;
 	}	
 
 	/**
 	 * Validates URL.
 	 */
-	protected function validator_url( $self, $attr, $val, $perform = false )
+	protected function validator_url( $self, $attr, $val )
 	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
+		foreach ( (array) $val as $v ) {
 			if ( $val && !validate_url( $val ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'url' ) );
+		}
+
+		return true;
 	}	
 
 	/**
 	 * Validates timestamp.
 	 */
-	protected function validator_timestamp( $self, $attr, $val, $perform = false )
+	protected function validator_timestamp( $self, $attr, $val )
 	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
+		foreach ( (array) $val as $v ) {
 			if ( !validate_int( $val, $attr['min'], $attr['max'] ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'timestamp' ) );
+		}
+
+		return true;
 	}	
 
 	/**
 	 * Validates int.
 	 */
-	protected function validator_int( $self, $attr, $val, $perform = false )
+	protected function validator_int( $self, $attr, $val )
 	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
+		foreach ( (array) $val as $v ) {
 			if ( $val !== '' && !validate_int( $val, $attr['min'], $attr['max'] ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'int' ) );
+		}
+
+		return true;
 	}	
 
 	/**
@@ -603,23 +621,25 @@ class Validatable extends Attr_controllable
 	 */
 	protected function validator_num( $self, $attr, $val, $perform = false )
 	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
+		foreach ( (array) $val as $v ) {
 			if ( $val !== '' && !validate_num( $val, $attr['min'], $attr['max'] ) )
 				throw new Validation_error( $this->_errmsg( $attr, 'num' ) );
+		}
+
+		return true;
 	}	
 
 	/**
 	 * Validates bool.
 	 */
-	protected function validator_bool( $self, $attr, $val, $perform = false )
+	protected function validator_bool( $self, $attr, $val )
 	{
-		if ( !$perform )
-			$this->_validate_using( __FUNCTION__, $self, $attr, $val );
-		else
+		foreach ( (array) $val as $v ) {
 			if ( $val === null )
 				throw new Validation_error( $this->_errmsg( $attr, 'bool' ) );
+		}
+
+		return true;
 	}	
 
 	#

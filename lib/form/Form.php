@@ -384,7 +384,7 @@ abstract class Form extends Validatable
 
 		# default data? TODO move??
 		if ( isset( $field['default'] ) && !isset( $this->$field_name ) )
-			$this->$field_name = $this->_get_or_call( $field['default'] );
+			$this->$field_name = $this->get_or_call( $field['default'] );
 	}
 
 	/**
@@ -520,9 +520,9 @@ abstract class Form extends Validatable
 	{
 		$field =& $this->_check_exists( $field_name );
 
-		return $this->_get_or_call(
+		return $this->get_or_call(
 			$this->_renderer( $field_name ),
-			array( $this, $field, $this->$field_name, $ctxt )
+			array( $this, $field, isset( $this->$field_name ) ? $this->$field_name : null, $ctxt )
 		);
 	}
 
