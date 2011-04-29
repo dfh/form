@@ -23,7 +23,6 @@
  */
 
 require dirname( __FILE__ ) . '/form/std.php';
-require dirname( __FILE__ ) . '/form/Attr_controllable.php';
 require dirname( __FILE__ ) . '/form/Validatable.php';
 require dirname( __FILE__ ) . '/form/Tpl.php';
 require dirname( __FILE__ ) . '/form/Form.php';
