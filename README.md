@@ -88,12 +88,12 @@ echo $form->render();
 Theses names are reserved (due to implementation choices) and not possible to
 use as field names:
 
-  * form_action
-  * form_method
-  * form_enctype
-  * form_accept_charset
-  * template_dir
-  * anything prefixed by underscore ("_")
+  * `form_action`
+  * `form_method`
+  * `form_enctype`
+  * `form_accept_charset`
+  * `template_dir`
+  * anything prefixed by `_`
 
 ## License
 
