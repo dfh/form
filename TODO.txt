@@ -1,3 +1,0 @@
-TODO
-
-* Document PUT/DELETE via POST (sets _use_http_put|delete)
